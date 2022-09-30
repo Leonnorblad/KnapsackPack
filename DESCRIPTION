@@ -5,7 +5,13 @@ Version: 1.0
 Date: 2022-09-30
 Author: Leonard Persson Norblad & Jacob Sibanda
 Maintainer: Leonard Persson Norblad <leope744@student.liu.se> Jacob Sibanda <jacsi259@student.liu.se>
-Description: Tree different algorithms to solve the Knapsack problem. brute forece, dynamic and greedy.
+Description: Tree different algorithms to solve the Knapsack problem. brute force, dynamic and greedy.
 License: GPL-3 + file LICENSE
 Encoding: UTF-8
 RoxygenNote: 7.2.1
+Suggests: 
+    knitr,
+    rmarkdown,
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
+VignetteBuilder: knitr

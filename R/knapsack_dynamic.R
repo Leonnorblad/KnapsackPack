@@ -1,5 +1,13 @@
 knapsack_dynamic <- function(x, W){
   
+  # Check input
+  if(!is.data.frame(x)|
+     !(names(x) %in% c("w", "v"))|
+     !any(is.numeric(x$w))|
+     !any(is.numeric(x$v))|
+     any(x<0)|
+     W<0) { stop("False input")}
+  
   # n=number of elements in data
   n <- nrow(x)
   
