@@ -48,10 +48,19 @@ brute_force_knapsack <- function(x, W, parallel=FALSE){
   all_test <- expand.grid(rep(list(0:1), n))==1
   
   if(parallel==TRUE){
+    # Find number of cores on computer
     numCores <- detectCores()
+    
+    # Creates cluster
     cl <- makeCluster(numCores, type = "PSOCK")
+    
+    # Weights
     w = x$w
+    
+    # Values
     v = x$v
+    
+    # Function to calculate weight and values
     ff <-function(y){
       value <- sum(v[y])
       weight <- sum(w[y])
@@ -60,8 +69,13 @@ brute_force_knapsack <- function(x, W, parallel=FALSE){
       
       return(list(value=value, elements=elements))
     }
+    # Apply function to all_test (all possible combinations)
     ret_list <- parApply(cl, all_test, 1, ff)
+    
+    # Turn of cluster
     stopCluster(cl)
+    
+    # Returns the best value found
     return(ret_list[[which.max(unlist(ret_list)[names(unlist(ret_list))=="value"])]])
     
   } else {
