@@ -50,7 +50,7 @@ brute_force_knapsack <- function(x, W, parallel=FALSE){
   all_test <- expand.grid(rep(list(0:1), n))==1
   
   if(parallel==TRUE){
-    # Find number of cores on computer
+    # Use 2 cores
     numCores <- 2
     
     # Creates cluster
