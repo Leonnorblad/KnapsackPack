@@ -6,6 +6,8 @@
 #' 
 #' @param W An integer, the knapsack weight limit.
 #' 
+#' @param parallel TRUE if parallel search. FALSE by default.
+#' 
 #' @return A list of two elements. The maximum value of the knapsack \code{value} and the elements in the knapsack \code{elements}.
 #' 
 #' @import parallel
@@ -49,7 +51,7 @@ brute_force_knapsack <- function(x, W, parallel=FALSE){
   
   if(parallel==TRUE){
     # Find number of cores on computer
-    numCores <- detectCores()
+    numCores <- 2
     
     # Creates cluster
     cl <- makeCluster(numCores, type = "PSOCK")

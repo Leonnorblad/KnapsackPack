@@ -39,6 +39,9 @@ greedy_knapsack <- function(x,W){
   # Ordering x based on the Value per Weight
   order_x <- x[order(v_per_w, decreasing = TRUE),]
   
+  w_x <- order_x$w
+  v_x <- order_x$v
+  
   # Inital values
   W_temp <- 0
   value <- 0
@@ -51,13 +54,13 @@ greedy_knapsack <- function(x,W){
   for(i in 1:n){
     
     # Will stop if the next item cant fit
-    if((W_temp+order_x[i,1])>W) {return(list(value=value, elements=elements))}
+    if((W_temp+w_x[i])>W) {return(list(value=value, elements=elements))}
     
     # Cumulative weight of the knapsack
-    W_temp <- sum(W_temp, order_x[i,1])
+    W_temp <- sum(W_temp, w_x[i])
     
     # Cumulative value of the knapsack
-    value <- sum(value, order_x[i,2])
+    value <- sum(value, v_x[i])
     
     # Elements in the knapsack 
     elements <- append(elements, as.numeric(rownames(order_x)[i]),)

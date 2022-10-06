@@ -10,6 +10,8 @@ brute_force_knapsack(x, W, parallel = FALSE)
 \item{x}{A \code{data.frame} of two non negative numeric columns \code{w} and \code{v}.}
 
 \item{W}{An integer, the knapsack weight limit.}
+
+\item{parallel}{TRUE if parallel search. FALSE by default.}
 }
 \value{
 A list of two elements. The maximum value of the knapsack \code{value} and the elements in the knapsack \code{elements}.

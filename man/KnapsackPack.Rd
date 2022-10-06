@@ -5,7 +5,7 @@
 \alias{KnapsackPack}
 \title{Knapsack algorithm}
 \description{
-Tree different algorithms to solve the Knapsack problem. Brute force, Dynamic and Greedy.
+Three different algorithms to solve the Knapsack problem. Brute force, Dynamic and Greedy.
 }
 \author{
 Leonard Persson Norblad \email{leope744@student.liu.se} Jacob Sibanda \email{jacsi259@student.liu.se}

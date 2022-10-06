@@ -1,6 +1,6 @@
 #' Knapsack algorithm
 #' 
-#' Tree different algorithms to solve the Knapsack problem. Brute force, Dynamic and Greedy.
+#' Three different algorithms to solve the Knapsack problem. Brute force, Dynamic and Greedy.
 #' 
 #' @docType package
 #' 
