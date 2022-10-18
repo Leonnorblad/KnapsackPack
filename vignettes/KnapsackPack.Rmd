@@ -30,34 +30,83 @@ v=runif(n = n, 0, 10000)
 ```
 
 ## Brute force
+The brute force algorithm will try all possible alternatives of items to include in the knapsack. The algorithm will select the combination of items with the highest value with the maximum possible weight (i.e. less than the Knapsack capacity). x is a data.frame of two non-negative numeric columns weight, w and their corresponding values v. W is the knapsack weight limit. If parallel=TRUE, then it performs a parallel search, otherwise FALSE by default. The function returns a list of two elements, the maximum value of the knapsack, "value" and the elements in the knapsack, "elements".
+
+### How to use the function - example
 ```{r}
+# Run the algorithm for the first eight values from the example data
+brute_force_knapsack(x=knapsack_objects[1:8,], W=3500)
+```
+
+### Runtime for 16 objects
+```{r, eval=FALSE}
 # Runtime for 16 objects
 system.time(brute_force_knapsack(x = knapsack_objects[1:16,], W = 2000))
+   # user  system elapsed 
+   # 0.34    0.02    0.34 
 ```
+
+The runtime for 16 objects of the brute force algorithm (non parallel) is about 0.3 seconds.
 
 ## Dynamic programming
+The dynamic algorithm divides the problem into sub-problems, solves them separately and stores the results in a matrix. It then uses the matrix to solve a wholistic problem by using the stored values when a similar/same problem is encountered. x is a data.frame of two non-negative numeric columns weight, w and their corresponding values v. W is the knapsack weight limit. The function returns a list of two elements, the maximum value of the knapsack, "value" and the elements in the knapsack, "elements".
+
+### How to use the function - example
 ```{r}
-# Runtime for 500 objects
-system.time(knapsack_dynamic(x = knapsack_objects[1:500,], W = 2000))
+# Run the algorithm for the first eight values from the example data
+knapsack_dynamic(x=knapsack_objects[1:8,], W=3500)
 ```
 
+### Runtime for 500 objects
+```{r, eval=FALSE}
+# Runtime for 500 objects
+system.time(knapsack_dynamic(x = knapsack_objects[1:500,], W = 2000))
+   # user  system elapsed 
+   # 1.80    0.02    1.80 
+```
+
+The runtime for 500 objects of the dynamic algorithm is about 1.8 seconds.
+
 ## Greedy heuristic
+The greedy algorithm order the elements based on the value per weight unit. It then fills the knapsack until the weight limit is reached. x is a data.frame of two non-negative numeric columns weight, w and their corresponding values v. W is the knapsack weight limit. The function returns a list of two elements, the maximum value of the knapsack, "value" and the elements in the knapsack, "elements".
+
+### How to use the function - example
 ```{r}
+# Run the algorithm for the first eight values from the example data
+# greedy_knapsack(x=knapsack_objects[1:8,], W=3500)
+```
+
+
+### Runtime for 1 000 000 objects
+```{r, eval=FALSE}
 # Runtime for 1 000 000 objects
 system.time(greedy_knapsack(x = knapsack_objects, W = 2000))
+   # user  system elapsed 
+   # 0.11    0.03    0.14 
 ```
+
+The runtime for 1 000 000 objects of the greedy heurisic algorithm is about 0.1 seconds.
 
 ## Code profiling and optimization
 By profiling our code we managed to cut the runtime by about 30%. For example, we indexed vectors instead of data frame (as we initially did), that seemed to have improved the efficiency.
 
 ## Parallel brute force search
-```{r}
+```{r, eval=FALSE}
 # Non parallel
 system.time(brute_force_knapsack(x = knapsack_objects[1:20,], W = 2000, parallel=FALSE))
+   # user  system elapsed 
+   # 5.40    0.01    5.45
+```
 
+
+```{r, eval=FALSE}
 # Parallel
 system.time(brute_force_knapsack(x = knapsack_objects[1:20,], W = 2000, parallel=TRUE))
+  #  user  system elapsed 
+  # 17.39    2.94   28.29 
 ```
+
+The runtime for the non-parallel search was about 5.5 seconds, and the runtime for the parallel search was about 28.3 seconds, which was 22.8 seconds slower.
 
 The parallelized brute search has multiple cores and uses the *apply* function which is expected to be faster than the one core and for loop brute search method, however, it rendered a longer runtime. The reason for this could be due to the simplicity of the calculations in the for loop which makes it faster.
 
